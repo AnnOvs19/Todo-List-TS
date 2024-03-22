@@ -1,10 +1,15 @@
 import React from "react";
 import { SHome } from "./home.style";
+import TodoHead from "../../components/TodoHead/TodoHead";
+import { Title } from "../../globalStyle";
+import TodoBody from "../../components/TodoBody/TodoBody";
 
 const Home = () => {
   return (
     <SHome>
-      <h1>Hello World from MyComponent</h1>
+      <Title>Todo List</Title>
+      <TodoHead />
+      <TodoBody />
     </SHome>
   );
 };

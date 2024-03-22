@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
-export const SHome = styled.section`
-  padding: 50px;
+export const BodyBlock = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 700px;
-  background-color: white;
+  gap: 10px;
 `;

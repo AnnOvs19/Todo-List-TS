@@ -15,6 +15,29 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color:#fafafa;
+  background-color:#f1ffe8;
+  font-family: "Hind Vadodara", sans-serif;
 }
+`;
+
+export const SApp = styled.main`
+  display: flex;
+  justify-content: center;
+`;
+
+export const Title = styled.h1`
+  text-align: center;
+  font-size: 35px;
+  color: black;
+`;
+
+export const TextMedium = styled.p`
+  font-size: 16px;
+  transition: 0.4s;
+  font-weight: 400;
+  color: black;
+`;
+
+export const ButtonText = styled.p`
+  font-family: "Hind Vadodara", sans-serif;
 `;

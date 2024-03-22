@@ -1,13 +1,13 @@
 import React from "react";
 import Home from "./page/HomePage/Home";
-import { GlobalStyle } from "./globalStyle";
+import { GlobalStyle, SApp } from "./globalStyle";
 
 function App() {
   return (
-    <div className="App">
+    <SApp>
       <GlobalStyle />
       <Home />
-    </div>
+    </SApp>
   );
 }
 
