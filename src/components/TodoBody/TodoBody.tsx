@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { BodyBlock } from "./todoBody.style";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -6,8 +6,10 @@ import {
   getItems,
   getTrueTasks,
   getTypeFilters,
+  loadTasks,
 } from "../../store/todoSlice";
 import TodoItem from "../TodoItem/TodoItem";
+import { ITodoItem } from "../../interfaces/todoItem";
 
 const TodoBody: FC = () => {
   const itemsList = useSelector(getItems);
@@ -15,11 +17,16 @@ const TodoBody: FC = () => {
   const falseTaskList = useSelector(getFalseTasks);
   const typeTask = useSelector(getTypeFilters);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  console.log(itemsList);
-  console.log(trueTaskList);
-  console.log(falseTaskList);
+  useEffect(() => {
+    const arrTasks: Array<ITodoItem> = JSON.parse(
+      localStorage.getItem("todoList")!
+    );
+    if (arrTasks?.length > 0) {
+      dispatch(loadTasks(arrTasks));
+    }
+  }, []);
 
   return (
     <BodyBlock>

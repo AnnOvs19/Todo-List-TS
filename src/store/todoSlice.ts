@@ -43,6 +43,8 @@ const todoSlice = createSlice({
 
     appendItem: (store, action: PayloadAction<ITodoItem>) => {
       store.items.push(action.payload);
+
+      localStorage.setItem("todoList", JSON.stringify(store.items));
     },
 
     deleteItem: (store, action: PayloadAction<string>) => {
@@ -55,6 +57,8 @@ const todoSlice = createSlice({
       store.filterFalse = store.filterFalse.filter(
         (elem) => elem.id !== action.payload && elem.status != true
       );
+
+      localStorage.setItem("todoList", JSON.stringify(store.items));
     },
 
     editTask: (store, action: PayloadAction<ITodoItem>) => {
@@ -77,6 +81,8 @@ const todoSlice = createSlice({
       store.filterTrue = store.items.filter((i) => i.status != false);
 
       store.filterFalse = store.items.filter((i) => i.status != true);
+
+      localStorage.setItem("todoList", JSON.stringify(store.items));
     },
   },
 });
