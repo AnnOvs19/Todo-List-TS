@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { ITodoItem } from "../../interfaces/todoItem";
 import {
   ButtonPanel,
@@ -30,15 +30,13 @@ const TodoItem: FC<IProps> = ({ item, type }) => {
   const [taskState, setTaskState] = useState<boolean>(item.status);
   const [editActive, setEditActive] = useState<boolean>(false);
   const [editValue, setEditValue] = useState<string>(item.text);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState<boolean>(item.status);
+  const [disableButton, setDisableButton] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
   function toggleCheckbox() {
     setIsChecked(!isChecked);
-  }
-
-  function toggleStatus() {
     dispatch(toggleState(item.id));
 
     if (taskState) {
@@ -71,6 +69,14 @@ const TodoItem: FC<IProps> = ({ item, type }) => {
     setEditActive(false);
   }
 
+  useEffect(() => {
+    if (editValue.length === 0) {
+      setDisableButton(true);
+    } else {
+      setDisableButton(false);
+    }
+  }, [editValue]);
+
   return (
     <ItemBlock>
       {editActive ? (
@@ -82,12 +88,16 @@ const TodoItem: FC<IProps> = ({ item, type }) => {
               onChange={(e) => setEditValue(e.target.value)}
             />
           </EditTextBox>
-          <SaveButton onClick={saveItems}>
+          <SaveButton
+            onClick={saveItems}
+            state={disableButton}
+            disabled={disableButton}
+          >
             <ButtonText>Save</ButtonText>
           </SaveButton>
         </ItemTextEdit>
       ) : (
-        <ItemText>{item.text}</ItemText>
+        <ItemText primary={taskState}>{item.text}</ItemText>
       )}
 
       <ControlPanel>
@@ -96,6 +106,7 @@ const TodoItem: FC<IProps> = ({ item, type }) => {
             type="checkbox"
             checked={isChecked}
             onChange={toggleCheckbox}
+            placeholder="Edit the text"
           />
           <CheckboxCheckmark>
             {isChecked && <CheckmarkIcon />}

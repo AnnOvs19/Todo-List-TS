@@ -2,7 +2,7 @@ import { ITodoItem } from "./todoItem";
 
 export interface IStore {
   items: ITodoItem[];
-  filterStatusFalse: ITodoItem[];
-  filterStatusTrue: ITodoItem[];
+  filterFalse: ITodoItem[];
+  filterTrue: ITodoItem[];
   type: number;
 }

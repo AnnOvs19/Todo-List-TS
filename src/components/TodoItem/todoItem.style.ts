@@ -5,6 +5,10 @@ interface IPropText {
   primary?: boolean;
 }
 
+interface IPropButton {
+  state?: boolean;
+}
+
 export const ItemBlock = styled.div`
   display: flex;
   justify-content: space-between;
@@ -12,7 +16,7 @@ export const ItemBlock = styled.div`
 `;
 
 export const ItemText = styled.p<IPropText>`
-  color: ${(props) => (props.primary ? "#2c5215" : "black")};
+  color: ${(props) => (props.primary ? "#244f09da" : "black")};
   font-size: 20px;
   transition: 0.4s;
   font-weight: 400;
@@ -35,10 +39,16 @@ export const EditTextInput = styled.input`
   outline: none;
 `;
 
-export const SaveButton = styled(HeadButton)`
+export const SaveButton = styled.button<IPropButton>`
+  border: none;
+  display: flex;
+  color: white;
   font-size: 14px;
   line-height: 100%;
   padding: 8px 15px;
+  background-color: ${(props) => (props.state ? "#325c19bb" : "#325c19")};
+  cursor: pointer;
+  transition: 0.4s;
 `;
 
 export const ControlPanel = styled.div`
