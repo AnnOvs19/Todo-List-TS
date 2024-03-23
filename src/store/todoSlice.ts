@@ -22,10 +22,33 @@ const todoSlice = createSlice({
     appendItem: (store, action: PayloadAction<ITodoItem>) => {
       store.items.push(action.payload);
     },
+
+    deleteItem: (store, action: PayloadAction<string>) => {
+      store.items = store.items.filter((elem) => elem.id !== action.payload);
+    },
+
+    editTask: (store, action: PayloadAction<ITodoItem>) => {
+      store.items = store.items.map((item) => {
+        if (item.id == action.payload.id) {
+          item.text = action.payload.text;
+          return item;
+        } else {
+          return item;
+        }
+      });
+    },
+
+    toggleState: (store, action: PayloadAction<string>) => {
+      const updatedItems = store.items.map((item) =>
+        item.id === action.payload ? { ...item, status: !item.status } : item
+      );
+      store.items = updatedItems;
+    },
   },
 });
 
-export const { loadTasks, appendItem } = todoSlice.actions;
+export const { loadTasks, appendItem, deleteItem, toggleState, editTask } =
+  todoSlice.actions;
 
 export const getItems = (store: RootState) => store.todoSlice.items;
 

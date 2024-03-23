@@ -1,14 +1,14 @@
 import styled from "styled-components";
+import { HeadButton, HeadInputBox } from "../TodoHead/todoHead.style";
 
 interface IPropText {
   primary?: boolean;
 }
 
 export const ItemBlock = styled.div`
-  margin-top: 20px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 export const ItemText = styled.p<IPropText>`
@@ -16,6 +16,29 @@ export const ItemText = styled.p<IPropText>`
   font-size: 20px;
   transition: 0.4s;
   font-weight: 400;
+`;
+
+export const ItemTextEdit = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
+export const EditTextBox = styled(HeadInputBox)`
+  width: 255px;
+  height: 30px;
+`;
+
+export const EditTextInput = styled.input`
+  width: 94%;
+  height: 85%;
+  border: none;
+  outline: none;
+`;
+
+export const SaveButton = styled(HeadButton)`
+  font-size: 14px;
+  line-height: 100%;
+  padding: 8px 15px;
 `;
 
 export const ControlPanel = styled.div`
@@ -29,6 +52,7 @@ export const CheckboxContainer = styled.label`
   cursor: pointer;
   transition: 0.4s;
   margin-right: 5px;
+  height: 31px !important;
 `;
 
 export const CheckboxInput = styled.input`
@@ -63,9 +87,10 @@ export const PanelImage = styled.img`
 `;
 
 export const ButtonPanel = styled.button`
-  margin-top: -3px;
+  margin-top: -2px;
   cursor: pointer;
   border: none;
   background-color: transparent;
   width: 32px !important;
+  height: 31px !important;
 `;

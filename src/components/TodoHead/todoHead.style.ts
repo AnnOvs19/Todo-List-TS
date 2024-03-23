@@ -12,7 +12,7 @@ export const HeadInputBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 455px;
+  width: 470px;
   height: 39px;
   border: 1px solid gray;
 `;
@@ -30,7 +30,7 @@ export const HeadButton = styled.button`
   background: #337ab7;
   font-size: 20px;
   line-height: 20px;
-  padding: 10px 25px;
+  padding: 10px 45px;
   color: white;
   background-color: #325c19;
   cursor: pointer;

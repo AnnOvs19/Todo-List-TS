@@ -38,7 +38,7 @@ const TodoHead: FC = () => {
       </HeadInputBox>
 
       <HeadButton onClick={addItem}>
-        <ButtonText>Добавить</ButtonText>
+        <ButtonText>Add</ButtonText>
       </HeadButton>
     </HeadBlock>
   );
