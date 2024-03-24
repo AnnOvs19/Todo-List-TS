@@ -5,14 +5,16 @@ import {
   HeadInput,
   HeadInputBox,
 } from "./todoHead.style";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ITodoItem } from "../../interfaces/todoItem";
-import { appendItem } from "../../store/todoSlice";
+import { appendItem, getItems } from "../../store/todoSlice";
 import { ButtonText } from "../../globalStyle";
 
 const TodoHead: FC = () => {
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState<string>("");
+
+  const allTask = useSelector(getItems);
 
   function addItem() {
     if (inputValue?.length > 0) {
@@ -20,6 +22,7 @@ const TodoHead: FC = () => {
         id: new Date().toLocaleTimeString(),
         status: false,
         text: inputValue,
+        order: allTask.length + 1,
       };
 
       setInputValue("");

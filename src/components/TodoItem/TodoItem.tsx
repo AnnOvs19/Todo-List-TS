@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { DragEvent, FC, useEffect, useState } from "react";
 import { ITodoItem } from "../../interfaces/todoItem";
 import {
   ButtonPanel,
@@ -17,21 +17,31 @@ import {
 } from "./todoItem.style";
 import edit from "../../assets/edit.svg";
 import basket from "../../assets/basket.svg";
-import { useDispatch } from "react-redux";
-import { deleteItem, editTask, toggleState } from "../../store/todoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteItem,
+  editTask,
+  getItems,
+  toggleState,
+} from "../../store/todoSlice";
 import { ButtonText } from "../../globalStyle";
 
 interface IProps {
   item: ITodoItem;
   type?: number;
+  draggable?: boolean;
+  dragStart: (e: DragEvent<HTMLDivElement>, item: ITodoItem) => void;
+  drop: (e: DragEvent<HTMLDivElement>, item: ITodoItem) => void;
 }
 
-const TodoItem: FC<IProps> = ({ item, type }) => {
+const TodoItem: FC<IProps> = ({ item, type, draggable, dragStart, drop }) => {
   const [taskState, setTaskState] = useState<boolean>(item.status);
   const [editActive, setEditActive] = useState<boolean>(false);
   const [editValue, setEditValue] = useState<string>(item.text);
   const [isChecked, setIsChecked] = useState<boolean>(item.status);
   const [disableButton, setDisableButton] = useState<boolean>(false);
+
+  const allTasks = useSelector(getItems);
 
   const dispatch = useDispatch();
 
@@ -63,6 +73,7 @@ const TodoItem: FC<IProps> = ({ item, type }) => {
       id: item.id,
       status: item.status,
       text: editValue,
+      order: allTasks.length + 1,
     };
 
     dispatch(editTask(editItem));
@@ -78,7 +89,12 @@ const TodoItem: FC<IProps> = ({ item, type }) => {
   }, [editValue]);
 
   return (
-    <ItemBlock>
+    <ItemBlock
+      draggable={draggable}
+      onDragStart={(e) => dragStart(e, item)}
+      onDrop={(e) => drop(e, item)}
+      onDragOver={(e) => e.preventDefault()}
+    >
       {editActive ? (
         <ItemTextEdit>
           <EditTextBox>

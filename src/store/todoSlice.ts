@@ -41,6 +41,11 @@ const todoSlice = createSlice({
       store.filterFalse = [];
     },
 
+    draggableSort: (store, action: PayloadAction<ITodoItem[]>) => {
+      store.items = action.payload;
+      localStorage.setItem("todoList", JSON.stringify(store.items));
+    },
+
     appendItem: (store, action: PayloadAction<ITodoItem>) => {
       store.items.push(action.payload);
 
@@ -96,6 +101,7 @@ export const {
   deleteItem,
   toggleState,
   editTask,
+  draggableSort,
 } = todoSlice.actions;
 
 export const getItems = (store: RootState) => store.todoSlice.items;

@@ -5,5 +5,5 @@ export const BodyBlock = styled.div`
   justify-content: center;
   flex-direction: column;
   margin-top: 30px;
-  gap: 20px;
+  gap: 10px;
 `;

@@ -13,6 +13,11 @@ export const ItemBlock = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  padding: 5px;
+
+  &:hover {
+    background-color: #2f750718;
+  }
 `;
 
 export const ItemText = styled.p<IPropText>`
